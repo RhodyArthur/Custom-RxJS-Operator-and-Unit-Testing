@@ -21,6 +21,8 @@ export class MultiplyService {
             // accepts only numbers
             if(typeof value === 'number') {
               observer.next(value * factor as T);
+            }
+            else {
               observer.error('Accepts numeric variables only')
             }
           },
