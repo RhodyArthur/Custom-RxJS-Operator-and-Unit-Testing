@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { filter, map, of, pipe } from 'rxjs';
+import { filter, map, of, pipe, tap } from 'rxjs';
 import { MultiplyService } from './services/multiply.service';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +15,6 @@ export class AppComponent {
   title = 'rxjs-operators';
 
 
-
   // create a custom operator
   // multiplyBy(factor: number) {
   //   return pipe(
@@ -24,16 +23,20 @@ export class AppComponent {
   //   )
   // }
 
-  constructor(private multiplyService: MultiplyService) {}
+  constructor(public multiplyService: MultiplyService) {}
 
   source$ = of(1,2,3,4,5);
   result!: number
+  results: number[] = []
   ngOnInit() {
 
-    this.source$.pipe(
-      this.multiplyService.multiplyBy(20))
+    this.source$
+    .pipe(this.multiplyService.multiplyBy(20))
     .subscribe(result => {
       console.log(result)
-    result})
+      this.results.push(result)
+    })
+
+    this.multiplyService.multiplyBy(20)
   }
 }

@@ -1,3 +1,6 @@
-<h1>Source</h1>
-<p>{{source$ | async}}</p>
-<!-- <p>{{result}}</p> -->
+<h1>Source values</h1>
+<p>{{multiplyService.sourceItems}}</p>
+
+@for (result of results; track $index) {
+    <p>Result:  {{result}}</p>
+}

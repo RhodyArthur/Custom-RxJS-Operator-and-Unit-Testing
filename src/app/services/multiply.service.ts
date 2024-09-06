@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 })
 export class MultiplyService {
 
+  sourceItems: number[] = []
+
   constructor() { }
 
   // custom operator: multiplyBy
@@ -19,8 +21,9 @@ export class MultiplyService {
         const subscription = observable.subscribe({
           next: value => {
             // accepts only numbers
-            if(typeof value === 'number') {
+            if(typeof value === 'number' && value !== undefined) {
               observer.next(value * factor as T);
+              this.sourceItems.push(value)
             }
             else {
               observer.error('Accepts numeric variables only')
